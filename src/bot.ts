@@ -1,13 +1,14 @@
-import * as Discord from 'discord.js';
+import { Client, Message } from 'discord.js';
 
 import 'dotenv/config';
+import Command from './command';
 
 export default class Bot {
-    private bot: Discord.Client;
+    private bot: Client;
     private readonly discord_token: string | undefined = process.env.DISCORD_TOKEN;
 
     constructor() {
-        this.bot = new Discord.Client();
+        this.bot = new Client();
     }
 
     /**
@@ -15,6 +16,13 @@ export default class Bot {
      * @return void
      */
     public start(): void {
+        // Intercepte les messages, vérifie si c'est une commande, si c'est le cas, la classe Command s'occupe de les parser
+        this.bot.on('message', (message: Message) => {
+            if (!message.content.startsWith('!')) return;
+            Command.parse(message);
+        })
+
+        // Connecte le bot
         this.bot.login(this.discord_token);
     }
 }
