@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 
-import PingCommand from './commands/ping.command';
+import ClearCommand from './commands/clear.command';
 
 export default class Command {
     /**
@@ -10,8 +10,8 @@ export default class Command {
     public static parse(message: Message): void {
         const messageText: string = message.content.substring(1);
         switch (messageText) {
-            case 'ping':
-                PingCommand.action(message);
+            case 'clear':
+                ClearCommand.action(message);
                 break;
             default:
                 break;
