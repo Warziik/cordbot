@@ -18,7 +18,7 @@ export default class Bot {
     public start(): void {
         // S'exécute lorsque le bot est prêt
         this.bot.on('ready', () => {
-            // this.bot.user.setAvatar('assets/avatar.png'); // Décommenter cette ligne si vous souhaitez mettre un avatar au bot
+            this.bot.user.setAvatar('assets/avatar.jpg');
             this.bot.user.setActivity('Être à votre service.');
         })
 
@@ -28,7 +28,7 @@ export default class Bot {
             if (!channel || channel.type !== 'text') return;
 
             const channelText = <TextChannel>channel;
-            channelText.send(`Bienvenue, ${member}`);
+            channelText.send(`Welcome stranger, ${member}`);
         })
 
         // Intercepte les messages, vérifie si c'est une commande, si c'est le cas, la classe Command s'occupe de les parser
